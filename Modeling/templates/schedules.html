@@ -1,0 +1,128 @@
+
+{% extends "base.html" %}
+{% block title %}Visual Schedules | VisualCare{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <h2>Visual Schedules</h2>
+        <p>Create and organize daily activities.</p>
+    </div>
+</div>
+
+<div class="content-card mb-4">
+    <h5>Create New Schedule</h5>
+
+    <form id="scheduleForm" class="row g-3">
+
+        <div class="col-md-5">
+            <label class="form-label">Select Child</label>
+            <select name="child_id" class="form-select" required>
+                <option value="">Choose a child</option>
+                {% for child in children %}
+                    <option value="{{ child.id }}">{{ child.fullname }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Schedule Title</label>
+            <input name="title" class="form-control"
+                   placeholder="e.g. Morning Routine" required>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Date</label>
+            <input name="schedule_date" type="date"
+                   class="form-control" required>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary">Create Schedule</button>
+        </div>
+
+    </form>
+</div>
+
+<div class="content-card mb-4">
+    <h5>Add Activity to Schedule</h5>
+
+    <form id="taskForm" class="row g-3">
+
+        <div class="col-md-6">
+            <label class="form-label">Schedule</label>
+            <select name="schedule_id" id="scheduleSelect"
+                    class="form-select" required>
+                <option value="">Loading schedules...</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label">Activity Name</label>
+            <input name="title" class="form-control"
+                   placeholder="e.g. Brush Teeth" required>
+        </div>
+
+        <div class="col-md-12">
+            <label class="form-label">Description</label>
+            <input name="description" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Start Time</label>
+            <input name="start_time" type="time" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">End Time</label>
+            <input name="end_time" type="time" class="form-control">
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label">Category</label>
+            <select name="category" class="form-select">
+                <option>Daily Routine</option>
+                <option>Learning</option>
+                <option>Personal Care</option>
+                <option>Play</option>
+                <option>Therapy</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary">Add Activity</button>
+        </div>
+
+    </form>
+</div>
+
+<div class="content-card">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5>Schedule Activities</h5>
+        <button class="btn btn-outline-primary btn-sm" onclick="loadTasks()">
+            Refresh
+        </button>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Activity</th>
+                    <th>Schedule</th>
+                    <th>Time</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="taskTable">
+                <tr><td colspan="6">Loading activities...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

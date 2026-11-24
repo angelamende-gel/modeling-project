@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+{% block title %}Progress Tracking | VisualCare{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <h2>Progress Tracking</h2>
+        <p>Monitor activity completion for each child.</p>
+    </div>
+    <button class="btn btn-outline-primary" onclick="loadProgress()">
+        <i class="bi bi-arrow-clockwise"></i> Refresh
+    </button>
+</div>
+
+<div class="content-card">
+
+    <h5>Child Performance Overview</h5>
+
+    <div class="table-responsive mt-3">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Child</th>
+                    <th>Total Activities</th>
+                    <th>Completed</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+
+            <tbody id="progressTable">
+                <tr><td colspan="4">Loading progress...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<div class="content-card mt-4">
+    <h5>Completion Overview</h5>
+    <canvas id="progressChart" height="120"></canvas>
+</div>
+
+{% endblock %}

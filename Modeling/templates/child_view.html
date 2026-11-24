@@ -1,0 +1,85 @@
+
+{% extends "base.html" %}
+{% block title %}My Activities | VisualCare{% endblock %}
+
+{% block content %}
+
+<div class="child-interface">
+
+    <div class="text-center mb-4">
+        <h1>Hello, {{ child.fullname }}! 👋</h1>
+        <p class="text-muted">Here is your schedule for today.</p>
+        <h5>{{ today if today else "Today's Activities" }}</h5>
+    </div>
+
+    <div class="row g-4">
+
+    {% for task in tasks %}
+
+        <div class="col-md-6 col-xl-4">
+            <div class="activity-card">
+
+                <div class="activity-icon">
+                    {% if task.category == 'Learning' %}
+                        📚
+                    {% elif task.category == 'Personal Care' %}
+                        🪥
+                    {% elif task.category == 'Play' %}
+                        🧸
+                    {% elif task.category == 'Therapy' %}
+                        🧩
+                    {% else %}
+                        ⭐
+                    {% endif %}
+                </div>
+
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description or 'It is time for this activity!' }}</p>
+
+                <div class="text-muted mb-3">
+                    {{ task.start_time or '' }}
+                </div>
+
+                {% if task.status == 'Completed' %}
+                    <button class="btn btn-success w-100" disabled>
+                        <i class="bi bi-check-circle"></i> Completed
+                    </button>
+                {% else %}
+                    <button class="btn btn-primary w-100"
+                            onclick="completeTask({{ task.id }}, this)">
+                        I Finished!
+                    </button>
+                {% endif %}
+
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="col-12 text-center">
+            <div class="content-card">
+                <h3>No activities scheduled yet!</h3>
+                <p>Ask your caregiver to add activities.</p>
+            </div>
+        </div>
+
+    {% endfor %}
+
+    </div>
+
+    <div class="content-card mt-4 text-center">
+        <h5>Activity Timer</h5>
+        <h1 id="timerDisplay">05:00</h1>
+
+        <button class="btn btn-primary" onclick="startTimer()">
+            Start Timer
+        </button>
+
+        <button class="btn btn-outline-secondary" onclick="resetTimer()">
+            Reset
+        </button>
+    </div>
+
+</div>
+
+{% endblock %}

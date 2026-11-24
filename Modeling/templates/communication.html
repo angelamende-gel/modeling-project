@@ -1,0 +1,56 @@
+
+{% extends "base.html" %}
+{% block title %}Communication Board | VisualCare{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <h2>Communication Board</h2>
+        <p>Help children express their needs and feelings.</p>
+    </div>
+</div>
+
+<div class="content-card mb-4">
+    <h5>Add Communication Card</h5>
+
+    <form id="communicationForm" class="row g-3">
+
+        <div class="col-md-4">
+            <input name="title" class="form-control"
+                   placeholder="Card name (e.g. Water)" required>
+        </div>
+
+        <div class="col-md-3">
+            <select name="category" class="form-select">
+                <option>Needs</option>
+                <option>Feelings</option>
+                <option>Activities</option>
+                <option>People</option>
+                <option>Places</option>
+            </select>
+        </div>
+
+        <div class="col-md-5">
+            <input name="image_url" class="form-control"
+                   placeholder="Image URL (optional)">
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary">Add Card</button>
+        </div>
+
+    </form>
+</div>
+
+<div class="content-card">
+
+    <h5>My Communication Board</h5>
+
+    <div class="row g-3 mt-2" id="communicationCards">
+        Loading cards...
+    </div>
+
+</div>
+
+{% endblock %}

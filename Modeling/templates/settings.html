@@ -1,0 +1,62 @@
+
+{% extends "base.html" %}
+{% block title %}Settings | VisualCare{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <h2>Settings</h2>
+        <p>Customize your VisualCare experience.</p>
+    </div>
+</div>
+
+<div class="content-card">
+
+    <form id="settingsForm">
+
+        <div class="setting-row">
+            <div>
+                <h6>Enable Text-to-Speech</h6>
+                <p class="text-muted">Allow communication cards to speak.</p>
+            </div>
+
+            <input type="checkbox" name="speech_enabled"
+                   {% if settings and settings.speech_enabled %}checked{% endif %}>
+        </div>
+
+        <hr>
+
+        <div class="setting-row">
+            <div>
+                <h6>Enable Notifications</h6>
+                <p class="text-muted">Enable activity reminders.</p>
+            </div>
+
+            <input type="checkbox" name="notification_enabled"
+                   {% if settings and settings.notification_enabled %}checked{% endif %}>
+        </div>
+
+        <hr>
+
+        <div class="mb-4">
+            <label class="form-label">Theme</label>
+            <select name="theme" class="form-select">
+                <option value="light"
+                    {% if settings and settings.theme == 'light' %}selected{% endif %}>
+                    Light
+                </option>
+                <option value="dark"
+                    {% if settings and settings.theme == 'dark' %}selected{% endif %}>
+                    Dark
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary">Save Settings</button>
+
+    </form>
+
+</div>
+
+{% endblock %}
